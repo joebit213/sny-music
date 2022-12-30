@@ -1,0 +1,6 @@
+.inetu
+.project
+.*.swp
+.*.swo
+*.sublime-project
+*.sublime-workspace

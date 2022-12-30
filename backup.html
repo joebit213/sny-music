@@ -1,0 +1,75 @@
+<section id="home-social" class="content-section white-section white-dark-brush-bottom">
+    <div class="instagram social-section">
+        <div class="container-fluid">
+            <div class="social-title clearfix">
+                <h2 class="section-title"><?php _e('@SonyMusicMexico', 'sme_mexico'); ?></h2>
+                <i class="fa fa-fw fa-instagram" aria-hidden="true"></i><span class="sr-only"><?php _e('Instagram', 'sme_mexico'); ?></span>
+            </div>
+            <div class="instagram-wrap">
+                <?php echo do_shortcode('[instagram-feed]'); ?>
+            </div>
+        </div>
+    </div>
+    <div class="btn-wrap">
+        <a href="https://www.instagram.com/sonymusicmexico/" target="_blank" class="btn btn-red"><?php _e('Síguenos en Instagram', 'sme_mexico'); ?></a>
+    </div>
+    <div class="twitter social-section">
+        <div class="container-fluid">
+            <div class="social-title clearfix">
+                <h2 class="section-title"><?php _e('@SonyMusicMexico', 'sme_mexico'); ?></h2>
+                <i class="fa fa-fw fa-facebook-official" aria-hidden="true"></i><span class="sr-only"><?php _e('Facebook', 'sme_mexico'); ?></span>
+            </div>
+            <div class="row">
+                <?php
+                $facebook_wall_posts = get_option('sme_mex_facebook');
+                if (!empty($facebook_wall_posts)) :
+                    foreach ($facebook_wall_posts as $facebook_wall_post) :
+                        ?>
+                        <div class="col-md-4">
+                            <article class="social-post">
+                                <div class="social-post-text">
+                                    <?php echo facebook_parse($facebook_wall_post['message']); ?>   
+                                </div> 
+                            </article>
+                        </div>
+                        <?php
+                    endforeach;
+                endif;
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="btn-wrap">
+        <a href="https://www.facebook.com/sonymusicmexico" target="_blank" class="btn btn-red"><?php _e('Síguenos en Facebook', 'sme_mexico'); ?></a>
+    </div>
+    <div class="twitter social-section">
+        <div class="container-fluid">
+            <div class="social-title clearfix">
+                <h2 class="section-title"><?php _e('@SonyMusicMexico', 'sme_mexico'); ?></h2>
+                <i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span class="sr-only"><?php _e('Twitter', 'sme_mexico'); ?></span>
+            </div>
+            <div class="row">
+                <?php
+                $tweets = getTweets(3, 'SonyMusicMexico', array('trim_user' => false, 'include_rts' => true));
+                foreach ($tweets as $tweet) :
+                    ?>
+                    <div class="col-md-4">
+                        <article class="social-post">
+                            <div class="social-post-text">
+                                <?php echo twitter_parse($tweet['text']); ?>
+                            </div>
+                            <div class="social-post-author">
+                                <a href="https://twitter.com/<?php echo $tweet['user']['screen_name']; ?>" target="_blank">@<?php echo $tweet['user']['screen_name']; ?></a>
+                            </div>
+                        </article>
+                    </div>
+                    <?php
+                endforeach;
+                ?>  
+            </div>
+        </div>
+    </div>
+    <div class="btn-wrap">
+        <a href="https://twitter.com/sonymusicmexico" target="_blank" class="btn btn-red"><?php _e('Síguenos en Twitter', 'sme_mexico'); ?></a>
+    </div>
+</section>

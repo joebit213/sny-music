@@ -1,0 +1,17 @@
+plugins:
+- slug: wordpress-seo
+- slug: thumbnail-upscale
+- slug: force-regenerate-thumbnails
+- slug: use-google-libraries
+- slug: disable-comments
+- slug: wp-pagenavi
+- slug: oauth-twitter-feed-for-developers
+- slug: fb-instant-articles
+- slug: post-duplicator
+- slug: wp-crontrol
+- url: 'https://gitlab.smehost.net/45press/wp-advanced-custom-fields-pro/repository/archive.zip?ref=master'
+  slug: advanced-custom-fields-pro
+- url: 'https://gitlab.smehost.net/45press/wp-admin-columns-pro/repository/archive.zip?ref=master'
+  slug: admin-columns-pro
+- slug: google-captcha
+  url: 'https://gitlab.smehost.net/inetu/wp-google-captcha/repository/archive.zip?ref=master' 

@@ -1,0 +1,214 @@
+Skip to content
+Projects
+Groups
+Activity
+Milestones
+Snippets
+This project
+Search
+
+S
+sonymusic.com.mx
+Project
+Repository
+Files
+Commits
+Branches
+Tags
+Contributors
+Graph
+Compare
+Charts
+Issues
+0
+Merge Requests
+0
+CI / CD
+Wiki
+Settings
+Collapse sidebar
+mx
+sonymusic.com.mx
+Repository
+devel
+sonymusic-com-mx  themes  smemexico  partials  loop-release.php
+ 
+James Fortunato's avatar
+WCAG 2.1 AA
+James Fortunato authored 3 years ago
+415a47c6
+ loop-release.php 4.12 KB
+ 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+<?php
+$associated_artist = get_field('associated_artist');
+$release_types = get_the_terms(get_the_ID(), 'release-type');
+$release_types_str = '';
+$release_types_arr = array();
+if ($release_types && !is_wp_error($release_types)) {
+    foreach ($release_types as $release_type) {
+        $release_types_arr[] = $release_type->name;
+    }
+    $release_types_str = '<span> - ' . join(", ", $release_types_arr) . '</span>';
+}
+$col_size = !empty($col_size) ? $col_size : 'col-md-3';
+?>
+<div class="<?php echo $col_size; ?>">
+    <article class="release-item">
+        <figure>
+            <?php the_post_thumbnail('release', array('class' => 'img-responsive')); ?>
+        </figure>
+        <div class="release-info">
+            <h3>
+                <span class="release-title"><?php the_title(); ?></span>
+                <span class="release-artist"><?php echo $associated_artist[0]->post_title; ?></span>
+            </h3>
+        </div>
+        <div class="release-links">
+            <div class="row">
+                <div class="col-sm-6">
+                    <?php
+                    if (have_rows('buy_links')) :
+                        ?>
+                        <div class="btn-group btn-block buy-links" role="group">
+                            <button type="button" class="btn btn-block btn-red dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <?php _e('Consíguelo aquí', 'sme_mexico'); ?>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <?php
+                                while (have_rows('buy_links')) : the_row();
+                                    $buy_title = get_sub_field('buy_title');
+                                    $buy_url = get_sub_field('buy_url');
+                                    if (!empty($buy_title) && !empty($buy_url)) :
+                                        ?>
+                                        <li>
+                                            <a href="<?php echo $buy_url; ?>" target="_blank"><?php echo $buy_title; ?></a>
+                                        </li>
+                                        <?php
+                                    endif;
+                                endwhile;
+                                ?>
+                            </ul>
+                        </div>                                        
+                        <?php
+                    endif;
+                    ?>
+                </div>
+                <div class="col-sm-6">
+                    <?php
+                    if (have_rows('stream_links')) :
+                        ?>
+                        <div class="btn-group btn-block stream-links" role="group">
+                            <button type="button" class="btn btn-block btn-red dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <?php _e('Escucha', 'sme_mexico'); ?>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <?php
+                                while (have_rows('stream_links')) : the_row();
+                                    $stream_title = get_sub_field('stream_title');
+                                    $stream_url = get_sub_field('stream_url');
+                                    if (!empty($stream_title) && !empty($stream_url)) :
+                                        ?>
+                                        <li>
+                                            <a href="<?php echo $stream_url; ?>" target="_blank"><?php echo $stream_title; ?></a>
+                                        </li>
+                                        <?php
+                                    endif;
+                                endwhile;
+                                ?>
+                            </ul>
+                        </div>                                        
+                        <?php
+                    endif;
+                    ?>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
